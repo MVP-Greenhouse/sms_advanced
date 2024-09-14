@@ -309,7 +309,6 @@ class SmsSender {
   ///
   /// This function will not set automatically thread id, you have to do it
   Future<SmsMessage?> sendSms(SmsMessage msg, {SimCard? simCard}) async {
-    print('[sms_advanced][sendSms] msg: $msg');
     if (msg.address == null || msg.body == null) {
       if (msg.address == null) {
         throw ("no given address");
@@ -350,8 +349,7 @@ class SmsSender {
   Stream<SmsMessage?> get onSmsDelivered => _deliveredStreamController.stream;
 
   void _onSmsStateChanged(dynamic stateChange) {
-    int? id = _sentMessages.keys.first;
-    print('[sms_advanced][onSmsStateChanged] id: $id');
+    int? id = stateChange['sentId'];
     if (_sentMessages.containsKey(id)) {
       switch (stateChange['state']) {
         case 'sent':
