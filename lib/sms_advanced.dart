@@ -350,6 +350,7 @@ class SmsSender {
 
   void _onSmsStateChanged(dynamic stateChange) {
     int? id = _sentMessages.keys.first;
+    print('[sms_advanced][onSmsStateChanged] id: $id');
     if (_sentMessages.containsKey(id)) {
       switch (stateChange['state']) {
         case 'sent':
